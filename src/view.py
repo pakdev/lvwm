@@ -3,7 +3,10 @@ from __future__ import annotations
 from abc import ABC
 import re
 
-import ahkpy
+from ahk import AHK
+from ahk.window import Window
+
+ahk = AHK()
 
 
 class View(ABC):
@@ -30,6 +33,6 @@ class LabViewManager:
     def get_projects(self) -> list[Project]:
         return [
             Project(win)
-            for win in ahkpy.windows.filter(class_name="LVDChild")
+            for win in ahk.find_window(class="LVDChild")
             if "Project Explorer" in win.title
         ]
